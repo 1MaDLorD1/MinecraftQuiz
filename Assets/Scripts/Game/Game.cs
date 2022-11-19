@@ -8,8 +8,12 @@ using UnityEngine.Events;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Menu _menu;
+    [SerializeField] private LoseMenu _loseMenu;
+    [SerializeField] private WinMenu _winMenu;
     [SerializeField] private AnswerButton[] _buttons;
     [SerializeField] private TMP_Text _questionView;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private ContinueWithAdButton _continueWithAdButton;
 
     private string _question;
     private string _correctAnswer;
@@ -26,14 +30,12 @@ public class Game : MonoBehaviour
     public UnityAction<int> QuestionAnswered;
     public UnityAction LevelComplete;
     public UnityAction HeartsUpdate;
-
-    private void Awake()
-    {
-        _questionConfiguration = _menu.GameSettings.Questions;
-    }
+    public UnityAction HeartAdd;
 
     private void OnEnable()
     {
+        _questionConfiguration = _menu.GameSettings.Questions;
+
         _heartsCount = 4;
 
         _listOfQuestions = _questionConfiguration.ToList();
@@ -50,6 +52,9 @@ public class Game : MonoBehaviour
             _buttons[i].WrongAnswer += OnWrongAnswer;
             _buttons[i].CorrectAnswer += OnCorrectAnswer;
         }
+
+        _timer.TimeEnd += OnTimeEnd;
+        _continueWithAdButton.HeartAdd += OnHeartAdd;
     }
 
     private void OnDisable()
@@ -59,6 +64,21 @@ public class Game : MonoBehaviour
             _buttons[i].WrongAnswer -= OnWrongAnswer;
             _buttons[i].CorrectAnswer -= OnCorrectAnswer;
         }
+
+        _timer.TimeEnd -= OnTimeEnd;
+        _continueWithAdButton.HeartAdd -= OnHeartAdd;
+    }
+
+    private void OnHeartAdd()
+    {
+        _heartsCount++;
+        HeartAdd?.Invoke();
+    }
+
+    private void OnTimeEnd()
+    {
+        _loseMenu.gameObject.SetActive(true);
+        _timer.gameObject.SetActive(false);
     }
 
     private void OnWrongAnswer()
@@ -68,8 +88,8 @@ public class Game : MonoBehaviour
 
         if (_heartsCount == 0)
         {
-            _menu.gameObject.SetActive(true);
-            gameObject.SetActive(false);
+            _loseMenu.gameObject.SetActive(true);
+            _timer.gameObject.SetActive(false);
         }
     }
 
@@ -89,8 +109,8 @@ public class Game : MonoBehaviour
         }
         else
         {
-            LevelComplete?.Invoke();
-            _menu.gameObject.SetActive(true);
+            Debug.Log("LevelPassed");
+            _winMenu.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
     }

@@ -27,9 +27,39 @@ public class HPBar : MonoBehaviour
         }
 
         _game.HeartsUpdate += OnHeartsUpdate;
+        _game.HeartAdd += OnHeartAdd;
     }
 
     private void OnDisable()
+    {
+        DestroyAllHearts();
+
+        _game.HeartsUpdate -= OnHeartsUpdate;
+        _game.HeartAdd -= OnHeartAdd;
+    }
+
+    private void OnHeartAdd()
+    {
+        DestroyAllHearts();
+
+        Instantiate(_heartPrefab, _heartsPosition);
+
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(_emptyHeartPrefab, _heartsPosition);
+        }
+    }
+
+    private void OnHeartsUpdate()
+    {
+        if (GetComponentInChildren<Heart>() != null)
+        {
+            Destroy(GetComponentInChildren<Heart>().gameObject);
+            Instantiate(_emptyHeartPrefab, _heartsPosition);
+        }
+    }
+
+    private void DestroyAllHearts()
     {
         var hearts = GetComponentsInChildren<Heart>();
         var emptyHearts = GetComponentsInChildren<EmptyHeart>();
@@ -48,17 +78,6 @@ public class HPBar : MonoBehaviour
             {
                 Destroy(emptyHearts[i].gameObject);
             }
-        }
-
-        _game.HeartsUpdate -= OnHeartsUpdate;
-    }
-
-    private void OnHeartsUpdate()
-    {
-        if (GetComponentInChildren<Heart>() != null)
-        {
-            Destroy(GetComponentInChildren<Heart>().gameObject);
-            Instantiate(_emptyHeartPrefab, _heartsPosition);
         }
     }
 }

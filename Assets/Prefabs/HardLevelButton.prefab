@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c848e38765cce014f9ddd21e080ed291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _game: {fileID: 0}
 --- !u!1 &8150942344185417416
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,8 +361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _difficulty: "\u0421\u041B\u041E\u0416\u041D\u041E"
-  _levelDifficulty: {fileID: 8150942343474108192}
-  _isUnlocked: 0
   _game: {fileID: 0}
   _menu: {fileID: 0}
-  _gameSettings: {fileID: 0}
+  IsUnlocked: 0
+  LevelDifficulty: {fileID: 8150942343474108192}
+  _gameSettings: {fileID: 11400000, guid: 82cd440899f841a49809511d141acfb2, type: 2}

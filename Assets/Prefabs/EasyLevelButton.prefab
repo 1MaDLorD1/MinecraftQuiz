@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _difficulty: "\u041B\u0415\u0413\u041A\u041E"
-  _levelDifficulty: {fileID: 8969252417192338244}
-  _isUnlocked: 1
   _game: {fileID: 0}
   _menu: {fileID: 0}
-  _gameSettings: {fileID: 0}
+  IsUnlocked: 1
+  LevelDifficulty: {fileID: 8969252417192338244}
+  _gameSettings: {fileID: 11400000, guid: 91d51fc60d392c6439ed3bf359d641b7, type: 2}
