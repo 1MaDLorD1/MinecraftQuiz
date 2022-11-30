@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -13,6 +14,8 @@ public class QuitInMenuButton : MonoBehaviour
 
     private Button _button;
 
+    public UnityAction ButtonClicked;
+
     private void Start()
     {
         if (_button == null) _button = GetComponent<Button>();
@@ -22,6 +25,8 @@ public class QuitInMenuButton : MonoBehaviour
 
     protected virtual void HandleClickButton()
     {
+        ButtonClicked?.Invoke();
+
         if (_game.gameObject.activeSelf == true)
         {
             _timer.gameObject.SetActive(true);

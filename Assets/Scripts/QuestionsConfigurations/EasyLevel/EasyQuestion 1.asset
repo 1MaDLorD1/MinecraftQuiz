@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8bc78ea46219648b524baaeb28d92c, type: 3}
   m_Name: EasyQuestion 1
   m_EditorClassIdentifier: 
-  _question: "\u041A\u0410\u041A\u041E\u0419 \u041D\u0410\u0418\u0411\u041E\u041B\u0415\u0415
-    \u0427\u0410\u0421\u0422\u041E \u0412\u0421\u0422\u0420\u0415\u0427\u0410\u042E\u0429\u0418\u0419\u0421\u042F
-    \u0420\u0410\u0417\u041C\u0415\u0420 \u0421\u0422\u0410\u041A\u0410?"
-  _correctAnswer: 64
+  _question: "\u041A\u041E\u0413\u0414\u0410 \u0411\u042B\u041B\u0410 \u041E\u041F\u0423\u0411\u041B\u0418\u041A\u041E\u0412\u0410\u041D\u0410
+    \u041D\u0410\u0427\u0410\u041B\u042C\u041D\u0410\u042F \u0412\u0415\u0420\u0421\u0418\u042F
+    MINECRAFT?"
+  _correctAnswer: 2009
   _wrongAnswers:
-  - 72
-  - 32
-  - 16
+  - 2007
+  - 2012
+  - 2015

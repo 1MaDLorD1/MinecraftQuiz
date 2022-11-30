@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using YG;
 
 public class WinScore : MonoBehaviour
 {
@@ -23,17 +24,14 @@ public class WinScore : MonoBehaviour
         if (_easyButton.IsStarted)
         {
             _score = _game.HeartsCount;
-            Debug.Log("Easy");
         }
         else if (_mediumButton.IsStarted)
         {
             _score = _game.HeartsCount * 2;
-            Debug.Log("Medium");
         }
         else if (_hardButton.IsStarted)
         {
             _score = _game.HeartsCount * 3;
-            Debug.Log("Hard");
         }
 
         ScoreAdded?.Invoke();

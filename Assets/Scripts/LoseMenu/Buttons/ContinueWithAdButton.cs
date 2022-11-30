@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
 public class ContinueWithAdButton : MonoBehaviour
@@ -14,6 +15,7 @@ public class ContinueWithAdButton : MonoBehaviour
 
     private Button _button;
 
+    public UnityAction ButtonClicked;
     public UnityAction HeartAdd;
 
     private void Start()
@@ -23,16 +25,56 @@ public class ContinueWithAdButton : MonoBehaviour
         _button.onClick.AddListener(HandleClickButton);
     }
 
-    protected virtual void HandleClickButton()
+    private void OnEnable()
     {
-        _timer.gameObject.SetActive(true);
+        YandexGame.OpenVideoEvent += OnOpenVideoEvent;
+        YandexGame.CloseVideoEvent += OnCloseVideoEvent;
+        YandexGame.ErrorVideoEvent += OnErrorVideoEvent;
+        YandexGame.RewardVideoEvent += Rewarded;
+    }
 
+    private void OnDisable()
+    {
+        YandexGame.OpenVideoEvent -= OnOpenVideoEvent;
+        YandexGame.CloseVideoEvent -= OnCloseVideoEvent;
+        YandexGame.ErrorVideoEvent -= OnErrorVideoEvent;
+        YandexGame.RewardVideoEvent -= Rewarded;
+    }
+
+    void OnOpenVideoEvent()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void OnCloseVideoEvent()
+    {
+    }
+
+    void OnErrorVideoEvent()
+    {
+        Debug.Log("Ошибка просмотра рекламы!");
+    }
+
+    void Rewarded(int id)
+    {
         if (_game.HeartsCount <= 0)
         {
             HeartAdd?.Invoke();
         }
+
         _answerButton.CorrectAnswer?.Invoke();
 
+        Time.timeScale = 1f;
+
+        _timer.gameObject.SetActive(true);
+
         _extraMenu.gameObject.SetActive(false);
+    }
+
+    protected virtual void HandleClickButton()
+    {
+        YandexGame.RewVideoShow(0);
+
+        ButtonClicked?.Invoke();
     }
 }

@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private DifficultyButton[] _difficultyButtons;
     [SerializeField] private Game _game;
+    [SerializeField] private Saver _saver;
     
     private GameSettings _gameSettings;
     public GameSettings GameSettings => _gameSettings;
@@ -81,6 +82,8 @@ public class Menu : MonoBehaviour
                 }
             }
         }
+
+        _saver.MySave();
 
         _mediumLevelStarted = false;
     }

@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
     private void OnDisable()
     {
         _game.QuestionAnswered -= OnQuestionAnswered;
-        _game.LevelComplete += OnLevelComplete;
+        _game.LevelComplete -= OnLevelComplete;
     }
 
     void Update()

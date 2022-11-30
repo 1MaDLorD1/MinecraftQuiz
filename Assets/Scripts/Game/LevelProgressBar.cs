@@ -15,21 +15,23 @@ public class LevelProgressBar : MonoBehaviour
 
     private float _questionsStartCount;
 
-    private void Start()
-    {
-        _questionsStartCount = _game.Questions.Length;
-    }
-
     private void OnEnable()
     {
         _game.QuestionAnswered += OnQuestionAnswered;
+        _game.QuestionConfigurationSetted += OnQuestionConfigurationSetted;
         _slider.value = 0;
-        _leftOf.text = $"0/{_questionsStartCount}";
     }
 
     private void OnDisable()
     {
         _game.QuestionAnswered -= OnQuestionAnswered;
+        _game.QuestionConfigurationSetted -= OnQuestionConfigurationSetted;
+    }
+
+    private void OnQuestionConfigurationSetted(int size)
+    {
+        _questionsStartCount = _game.Questions.Length;
+        _leftOf.text = $"0/{_questionsStartCount}";
     }
 
     private void OnQuestionAnswered(int size)

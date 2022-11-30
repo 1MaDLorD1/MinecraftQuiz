@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8bc78ea46219648b524baaeb28d92c, type: 3}
   m_Name: EasyQuestion 2
   m_EditorClassIdentifier: 
-  _question: "\u041A\u0422\u041E \u0421\u041E\u0417\u0414\u0410\u0422\u0415\u041B\u042C
-    \u041C\u0410\u0418\u041D\u041A\u0420\u0410\u0424\u0422\u0410"
-  _correctAnswer: "\u041D\u041E\u0422\u0427"
+  _question: "\u041A\u0410\u041A\u0410\u042F \u041A\u041E\u041C\u041F\u0410\u041D\u0418\u042F
+    \u0420\u0410\u0417\u0420\u0410\u0411\u0410\u0422\u042B\u0412\u0410\u0415\u0422
+    MINECRAFT?"
+  _correctAnswer: MOJANG
   _wrongAnswers:
-  - "\u042F"
-  - "\u0422\u042B"
-  - "\u041E\u041D"
+  - MIJONG
+  - MAJONG
+  - MICROJONG

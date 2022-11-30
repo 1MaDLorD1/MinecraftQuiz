@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using YG;
 
 public class Game : MonoBehaviour
 {
@@ -29,12 +30,17 @@ public class Game : MonoBehaviour
 
     public UnityAction<int> QuestionAnswered;
     public UnityAction LevelComplete;
+    public UnityAction GameComplete;
     public UnityAction HeartsUpdate;
     public UnityAction HeartAdd;
+    public UnityAction PlayerDead;
+    public UnityAction<int> QuestionConfigurationSetted;
 
     private void OnEnable()
     {
         _questionConfiguration = _menu.GameSettings.Questions;
+
+        QuestionConfigurationSetted?.Invoke(_questionConfiguration.Length);
 
         _heartsCount = 4;
 
@@ -77,8 +83,20 @@ public class Game : MonoBehaviour
 
     private void OnTimeEnd()
     {
-        _loseMenu.gameObject.SetActive(true);
         _timer.gameObject.SetActive(false);
+
+        _heartsCount--;
+        HeartsUpdate?.Invoke();
+
+        if (_heartsCount == 0)
+        {
+            PlayerDead?.Invoke();
+            _loseMenu.gameObject.SetActive(true);
+        }
+        else
+        {
+            _timer.gameObject.SetActive(true);
+        }
     }
 
     private void OnWrongAnswer()
@@ -88,6 +106,7 @@ public class Game : MonoBehaviour
 
         if (_heartsCount == 0)
         {
+            PlayerDead?.Invoke();
             _loseMenu.gameObject.SetActive(true);
             _timer.gameObject.SetActive(false);
         }
@@ -109,7 +128,8 @@ public class Game : MonoBehaviour
         }
         else
         {
-            Debug.Log("LevelPassed");
+            YandexGame.FullscreenShow();
+            GameComplete?.Invoke();
             _winMenu.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }

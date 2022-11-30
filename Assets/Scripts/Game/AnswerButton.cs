@@ -13,6 +13,7 @@ public class AnswerButton : MonoBehaviour
 
     public UnityAction CorrectAnswer;
     public UnityAction WrongAnswer;
+    public UnityAction ButtonClicked;
 
     private void Start()
     {
@@ -23,6 +24,8 @@ public class AnswerButton : MonoBehaviour
 
     private void HandleClickButton()
     {
+        ButtonClicked?.Invoke();
+
         if (IsCorrect)
             CorrectAnswer?.Invoke();
         else
