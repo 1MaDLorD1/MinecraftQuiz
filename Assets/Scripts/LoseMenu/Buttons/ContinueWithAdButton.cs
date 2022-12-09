@@ -48,6 +48,11 @@ public class ContinueWithAdButton : MonoBehaviour
 
     void OnCloseVideoEvent()
     {
+        Time.timeScale = 1f;
+
+        _answerButton.CorrectAnswer?.Invoke();
+
+        _extraMenu.gameObject.SetActive(false);
     }
 
     void OnErrorVideoEvent()
@@ -62,13 +67,7 @@ public class ContinueWithAdButton : MonoBehaviour
             HeartAdd?.Invoke();
         }
 
-        _answerButton.CorrectAnswer?.Invoke();
-
-        Time.timeScale = 1f;
-
         _timer.gameObject.SetActive(true);
-
-        _extraMenu.gameObject.SetActive(false);
     }
 
     protected virtual void HandleClickButton()

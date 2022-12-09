@@ -19,19 +19,21 @@ public class WinScore : MonoBehaviour
 
     public UnityAction ScoreAdded;
 
+    private const int _scoreIncreaser = 2;
+
     private void OnEnable()
     {
         if (_easyButton.IsStarted)
         {
-            _score = _game.HeartsCount;
+            _score = _game.HeartsCount * _scoreIncreaser;
         }
         else if (_mediumButton.IsStarted)
         {
-            _score = _game.HeartsCount * 2;
+            _score = _game.HeartsCount * _scoreIncreaser * 2;
         }
         else if (_hardButton.IsStarted)
         {
-            _score = _game.HeartsCount * 3;
+            _score = _game.HeartsCount * _scoreIncreaser * 3;
         }
 
         ScoreAdded?.Invoke();

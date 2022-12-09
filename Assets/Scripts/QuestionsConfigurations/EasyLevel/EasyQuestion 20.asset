@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _question: "\u0421\u041A\u041E\u041B\u042C\u041A\u041E \u0421\u041B\u041E\u0416\u041D\u041E\u0421\u0422\u0415\u0419
     \u0412 \u0418\u0413\u0420\u0415?"
-  _correctAnswer: 5
+  _correctAnswer: 4
   _wrongAnswers:
-  - 4
+  - 5
   - 3
   - 2
